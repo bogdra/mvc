@@ -260,6 +260,101 @@ class DB
 
     }
 
+    /** 
+     * Insert method for inserting elements into a db
+     * 
+     * Usage: insert('users',["name"=>'andrei','email'=>'andrei@gmail.com']);
+     * 
+     * @param string $table  table where we insert the rows
+     * @param array  $fields associative array with the values to insert
+     * 
+     * @return boolean true if the insert operation was a success
+     */
+    public function insert($table, $fields = [])
+    {
+        $fieldString = '';
+        $valueString = '';
+        $values = [];
+
+        //we are going through the $fields array separating the values from fields
+        foreach ($fields as $field => $value) {
+
+            $fieldString .= '`' .$field. '`,';
+            $valueString .= '?,';
+    
+            $values[] = $value;
+
+        }
+        // remove the extra comma from the end of the string
+        $fieldString = rtrim($fieldString, ',');
+        $valueString = rtrim($valueString, ',');
+
+        $sql = "INSERT INTO `{$table}` ({$fieldString}) VALUES ({$valueString}) ";
+        echo ($sql);
+        //checking if any errors were return when executing this query
+        if (!$this->query($sql, $values)->error()) {
+          
+            return true;
+
+        }
+
+        return false;
+
+    }
+
+    /**
+     * Update method to update  rows in a given table 
+     * 
+     * Usage: update('_table_name_', ['_table_field_' => 33], [
+     *                                  'first_name'=>'andrei',
+     *                                  'last_name'=> 'acasa' 
+     *                                   ]))
+     * 
+     * @param string $table     Table name where we want to update
+     * @param array  $condition Array of one element that needs to be true
+     * @param array  $fields    Fields that we want to update in the given row
+     * 
+     * @return boolean  true in case the update was succesfull
+     */
+    public function update($table, $condition = [], $fields = []) 
+    {
+
+        $fieldString = '';
+        $values = [];
+        
+        foreach ($fields as $field => $value) {
+
+            $fieldString .= ' ' .$field. '= ?,';
+            $values[] = $value;
+        }
+        
+        $fieldString = trim($fieldString);
+        //rtrim the last comma from the final string
+        $fieldString = rtrim($fieldString, ',');
+
+        //conditions key /value
+
+        if (count($condition) != 1) {
+          
+            return false;
+        } 
+
+        foreach ($condition as $key => $value) {
+          
+            $conditionKey   = $key;
+            $values[]       = $value;
+        }
+
+
+        $sql = "UPDATE `{$table}` SET {$fieldString} WHERE {$conditionKey}  = ? ";
+
+        if (!$this->query($sql, $values)->error() ) {
+            return true;
+        }
+        return false;
+
+    }
+
     /**
      * Getter method for the private property $_result
      * 
