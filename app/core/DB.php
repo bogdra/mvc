@@ -355,6 +355,47 @@ class DB
 
     }
 
+    /** 
+     * DELETE method to delete an element certain conditions are meet
+     * 
+     * Usage: delete('_table_name_',['id' => '44'])
+     * 
+     * @param string $table Table name where the action is takeing place
+     * @param array  $cond  Array of condions 
+     * 
+     * @return boolean     
+     */
+    public function delete($table ,$cond = []) 
+    {
+
+        foreach ($cond as $key => $value) {
+
+            $conditionKey   = $key;
+            $conditionValue = $value;
+            
+        } 
+
+        $sql  = "DELETE FROM `{$table}` WHERE {$conditionKey} = {$conditionValue}";
+        
+        if (!$this->query($sql)->error()) {
+
+            return true;
+        }
+        return false;
+
+    }
+
+    /**
+     * Getter method to return the results
+     * 
+     * @return array Array of results objects
+     */
+    public function results() 
+    {
+      return $this->_result;
+    }
+
+
     /**
      * Getter method for the private property $_result
      * 
