@@ -63,8 +63,8 @@ class DB
     /**
      * Prepares and Executes the sql statement
      * 
-     * @param string $sqlStatement =>The sql statement that we are going to execute 
-     * @param array  $params       =>Array params to bind to the sql 
+     * @param string $sqlStatement The sql statement that we are going to execute 
+     * @param array  $params       Array params to bind to the sql 
      * 
      * @return object $this 
      */
@@ -392,7 +392,7 @@ class DB
      */
     public function results() 
     {
-      return $this->_result;
+        return $this->_result;
     }
 
 
