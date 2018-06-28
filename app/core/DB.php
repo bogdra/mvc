@@ -300,7 +300,7 @@ class DB
 
         return false;
 
-    }
+    } 
 
     /**
      * Update method to update  rows in a given table 
