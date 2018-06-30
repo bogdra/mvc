@@ -8,11 +8,19 @@ class Home extends Controller
        // echo 'home controller activated';
 
     }
-
+    
     public function index()
     {
              $db = DB::getInstance();
-             $db->_query('SELECT * FROM users WHERE 1',[]);
+             // $db->query("SELECT * FROM users WHERE last_name = ? AND first_name = ? ",['Dragoi','Bogdan']);
+             $db->select('users',[
+                    'what' => 'username',
+                    'cond' => [
+                            ['first_name','=','Bogdan'],
+                            ['last_name','=','Dragoi']
+                            
+                    ]
+             ]);
              dnd ($db,'object example home.php-16');
              $model = parent::_model('home');
              //View::render('home/index');

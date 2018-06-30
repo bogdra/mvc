@@ -20,15 +20,15 @@ class DB
             $_error = false,    // errors holder
             $_lastInsertedId,
             $_result;
-    public $className;
-
+    public  $bindValues;
+  
     /**
      * Instantiating a new database connection
      */
     public function __construct()
     {
 
-        $this->className = debug_backtrace(); 
+        
         try
         {
             $this->_PDO = new PDO(
@@ -68,7 +68,7 @@ class DB
      * 
      * @return object $this 
      */
-    public function query($sqlStatement, $params) 
+     public function query($sqlStatement, $params) 
     {
         $this->_error = false;
 
@@ -76,7 +76,7 @@ class DB
         {
             
             $this->_query = $this->_PDO->prepare($sqlStatement);
-
+           
             // check if the sql statement has been succesfully prepared
             if ($this->_query) {
 
@@ -87,6 +87,7 @@ class DB
                         
                         $this->_query->bindValue($x, $param);
                         $x++;
+                        
                     }
                 }
 
@@ -94,7 +95,7 @@ class DB
 
                     $this->_result         = $this->_query->fetchALL(PDO::FETCH_OBJ);
                     $this->_count          = $this->_query->rowCount();
-                    $this->_lastInsertedID = $this->_PDO->lastInsertID();
+                    $this->_lastInsertedId = $this->_PDO->lastInsertID();
 
                 } else {
 
@@ -107,17 +108,16 @@ class DB
         catch(PDOException $e)
         {
             Logger::logError($e->getMessage());
-            dnd($e->getMessage(), 'DB-106');    
+            //dnd($e->getMessage(), 'DB-106');    
         }
-
 
         return $this;
             
     }
    
-    
+
       /**
-       * Base method used to select rows from DB
+       * Select method used to select rows from DB
        * 
        * Usage :    select($table, [
        * -------------------------------
@@ -171,8 +171,8 @@ class DB
                     array_push($bindValues, $what); 
                 }  
             } else {
-                $whatFinalString = '?';
-                array_push($bindValues, $params['what']);
+                $whatFinalString = $params['what'];
+               // array_push($bindValues, $params['what']);
             }
           
             $whatFinalString = rtrim($whatFinalString, ',');
@@ -194,14 +194,14 @@ class DB
                 if (!array_key_exists(0, $params['cond'])) {
                   
                     foreach ($params['cond'] as $key => $value) {
-                        $conditions .= '? = ? AND '; 
-                        array_push($bindValues, $key);
+                        $conditions .= $key.' = ? AND '; 
+                        //array_push($bindValues, $key);
                         array_push($bindValues, $value);
                     }
                 } else { 
                     foreach ($params['cond'] as $condition) {
-                        $conditions .= '? '.$condition[1].' ? AND '; 
-                        array_push($bindValues, $condition[0]);
+                        $conditions .= $condition[0].' '.$condition[1].' ? AND '; 
+                        //array_push($bindValues, $condition[0]);
                         array_push($bindValues, $condition[2]);
 
                     }
@@ -250,6 +250,7 @@ class DB
         $statement  = "SELECT {$whatFinalString} FROM {$table} ";
         $statement .= "{$conditions} {$orderBy} {$limit}";
         
+       
         if ($this->query($statement, $bindValues) ) {
 
             if (!count($this->_result)) { 

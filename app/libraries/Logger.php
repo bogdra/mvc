@@ -36,7 +36,7 @@ class Logger
     private static function _formatedMessage($msg)
     {
          $currentTime = date("Y-m-d H:i:s");
-         return $msg.' - '.$currentTime;
+         return $msg.' - '.$currentTime."/n";
     }
 
 

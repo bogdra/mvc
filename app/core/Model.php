@@ -6,4 +6,5 @@ class Model
      {
          echo 'model parent activated<br>';
      }
+     
 }

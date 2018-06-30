@@ -1,1 +1,2 @@
 SQLSTATE[HY000] [1049] Unknown database 'myvc' - 2018-06-19 17:49:55
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user' in 'field list' - 2018-06-28 18:01:43

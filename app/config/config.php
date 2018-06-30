@@ -4,7 +4,7 @@
 define('ROOT', dirname(__FILE__,2));
 
 // URL Root
-define ('URL_ROOT','http://localhost/mymvc');
+define ('URL_ROOT','http://localhost/mvc');
 
 // Web Site Name
 define ('SITE_NAME', '_Site Name_');

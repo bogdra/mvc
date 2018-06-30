@@ -26,6 +26,7 @@ class Controller
         return null;
     }
 
+    
     protected function _view($viewName)
     {
         list($viewFolder,$viewFile)  = explode('/',$viewName);
