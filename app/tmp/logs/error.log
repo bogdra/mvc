@@ -1,2 +1,9 @@
 SQLSTATE[HY000] [1049] Unknown database 'myvc' - 2018-06-19 17:49:55
-SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user' in 'field list' - 2018-06-28 18:01:43SQLSTATE[HY000]: General error: 1364 Field 'password' doesn't have a default value - 2018-06-30 11:25:27/nSQLSTATE[HY000]: General error: 1364 Field 'password' doesn't have a default value - 2018-06-30 11:27:52/nSQLSTATE[HY000]: General error: 1364 Field 'password' doesn't have a default value - 2018-06-30 11:29:24/nSQLSTATE[HY000]: General error: 1364 Field 'password' doesn't have a default value - 2018-06-30 11:29:40/nSQLSTATE[HY000]: General error: 1364 Field 'group_id' doesn't have a default value - 2018-06-30 14:42:31/nSQLSTATE[HY000]: General error: 1364 Field 'group_id' doesn't have a default value - 2018-06-30 14:42:54/nSQLSTATE[HY000]: General error: 1364 Field 'group_id' doesn't have a default value - 2018-06-30 14:42:57/n
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'user' in 'field list' - 2018-06-28 18:01:43
+SQLSTATE[HY000]: General error: 1364 Field 'password' doesn't have a default value - 2018-06-30 11:25:27
+SQLSTATE[HY000]: General error: 1364 Field 'password' doesn't have a default value - 2018-06-30 11:27:52
+SQLSTATE[HY000]: General error: 1364 Field 'password' doesn't have a default value - 2018-06-30 11:29:24
+SQLSTATE[HY000]: General error: 1364 Field 'password' doesn't have a default value - 2018-06-30 11:29:40
+SQLSTATE[HY000]: General error: 1364 Field 'group_id' doesn't have a default value - 2018-06-30 14:42:31
+SQLSTATE[HY000]: General error: 1364 Field 'group_id' doesn't have a default value - 2018-06-30 14:42:54
+SQLSTATE[HY000]: General error: 1364 Field 'group_id' doesn't have a default value - 2018-06-30 14:42:57

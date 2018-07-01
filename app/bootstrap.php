@@ -1,6 +1,8 @@
 <?php
 
- // here we bootstrap all the needed libraries
+ /**    
+  * Bootstrap file that includes all the necesary classes
+  */
 
  include_once ('config' .DS. 'config.php');
  include_once ('helpers' .DS. 'helpers.php');

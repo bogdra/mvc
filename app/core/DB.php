@@ -68,7 +68,7 @@ class DB
      * 
      * @return object $this 
      */
-    public function query($sqlStatement, $params) 
+    public function query($sqlStatement, $params = []) 
     {
         $this->_error = false;
 
@@ -108,7 +108,7 @@ class DB
         catch(PDOException $e)
         {
             Logger::logError($e->getMessage());
-            //dnd($e->getMessage(), 'DB-106');    
+           // dnd($e->getMessage(), 'DB-106');    
         }
 
         return $this;
@@ -148,7 +148,7 @@ class DB
        * 
        * @return bool  True if the $this->_result is not null
        */
-    public function select($table, $params)
+    public function select($table, $params = [])
     {
         $bindValues       = [];
         $whatFinalString  = '';
@@ -370,14 +370,15 @@ class DB
 
         foreach ($cond as $key => $value) {
 
-            $conditionKey   = $key;
-            $conditionValue = $value;
+            $conditionKey    = $key;
+            $condValueHolder = '?';
+            $params[]        = $value;
             
         } 
 
-        $sql  = "DELETE FROM `{$table}` WHERE {$conditionKey} = {$conditionValue}";
+        $sql  = "DELETE FROM `{$table}` WHERE {$conditionKey} = {$condValueHolder}";
         
-        if (!$this->query($sql)->getError()) {
+        if (!$this->query($sql, $params)->getError()) {
 
             return true;
         }
@@ -418,10 +419,10 @@ class DB
         return $this->_lastInsertedId;
     }
  
-      /**
+    /**
      * Getter function for the protected error property
      *
-     *  @return string $_error 
+     * @return string $_error 
      */
     public function getError() 
     {

@@ -7,7 +7,7 @@ define('ROOT', dirname(__FILE__,2));
 define ('URL_ROOT','http://localhost/mvc');
 
 // Web Site Name
-define ('SITE_NAME', '_Site Name_');
+define ('SITE_NAME', 'MVC');
 
 // sets the debug mode on or off
 define('DEBUG',1);

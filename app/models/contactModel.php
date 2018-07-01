@@ -1,11 +1,13 @@
 <?php
 
-class homeModel extends Model
+class contactModel extends Model
 {
-    protected $db;
     public function __construct()
     {
         parent::__construct();
-      
+        $db = parent::db;
     }
+
+   
+    
 }

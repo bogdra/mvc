@@ -36,7 +36,7 @@ class Logger
     private static function _formatedMessage($msg)
     {
          $currentTime = date("Y-m-d H:i:s");
-         return $msg.' - '.$currentTime."/n";
+         return $msg.' - '.$currentTime."\n";
     }
 
 
@@ -52,7 +52,7 @@ class Logger
         error_log(
             self::_formatedMessage($msg), 
             3, self::$pathOfGeneralErrorLogFile
-        );
+                );
     }
 
 }

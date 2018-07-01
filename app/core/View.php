@@ -1,118 +1,46 @@
 <?php
 
-class View  {
+class View
+{
 
-    protected   $_head ,
-                $_body ,
-                $_siteTitle = SITE_NAME ,
-                $_outputBuffer ,
-                $_layout = DEFAULT_LAYOUT.'Layout' ;
-
-    public function __construct() 
-    {
-
-	}
-
-    //render method to show the content to the user
-    public function render($viewName) 
-    {
-
-        $viewAry = explode('/', $viewName);
-        
-        // the view string modified with the right DIRECTORY SEPARATOR
-        $viewString         = implode(DS, $viewAry);
-
-        $fullViewPath       = ROOT .DS. 'views' .DS. $viewString . '.php';
-        $fullLayoutPath     = ROOT .DS. 'views' .DS. 'layouts' .DS. $this->_layout . '.php' ;
-            
-       // dnd($fullViewPath);
-        if (file_exists( $fullViewPath )) 
-        {
-
-			include( $fullViewPath );
-            include( $fullLayoutPath );
-            
-
-        } else 
-        {
-			die('The view ' .$viewName. ' does not exists ');
-		}
-
-    }
     
-  
-
-  
-    //getter function for the properties _body , _head
-    public function content($type) 
+    /**
+     * Render a view file
+     *
+     * @param string $view  The view file
+     * @param array $args  Associative array of data to display in the view (optional)
+     *
+     * @return void
+     */
+    public static function render($view, $args = [])
     {
+        extract($args, EXTR_SKIP);
+        $file = ROOT . DS."views".DS. $view;  // relative to Core directory
 
-        if  ($type == 'head') 
-        {
-
-			return $this->_head;
-
-        } elseif ( $type = 'body' ) 
-        {
-
-			return $this->_body;
-
-		}
-
-    return false;
-
-	}
-
-
-
-    //used to output content in the layout
-	public function start($type) {
-
-		$this->_outputBuffer = $type;
-		ob_start();
-
+        if (is_readable($file)) {
+            require $file;
+        } else {
+            throw new \Exception("$file not found");
+        }
     }
+
+    /**
+     * Render a view template using Twig
+     *
+     * @param string $template  The template file
+     * @param array $args  Associative array of data to display in the view (optional)
+     *
+     * @return void
+     */
+    public static function renderTemplate($template, $args = [])
+    {
+        static $twig = null;
+        if ($twig === null) {
     
-
-
-	public function end() {
-
-		if ($this->_outputBuffer == 'head') {
-
-			$this->_head = ob_get_clean();
-
-		} elseif ($this->_outputBuffer == 'body' ) {
-
-			$this->_body = ob_get_clean();
-
-		} else {
-
-			die ('You must first run the <b>start</b> method');
-
-		}
-
-	}
-
-
-
-	public function setSiteTitle($title) {
-
-		$this->_siteTitle = $title;
-	}
-
-
-
-	public function getSiteTitle() {
-
-		return $this->_siteTitle;
-	}
-//------------------------------------------------
-
-
-	public function setLayout($path) {
-
-		$this->_layout = $path;
-	}
-
+            $loader = new Twig_Loader_Filesystem(ROOT .DS. 'views');
+            $twig   = new Twig_Environment($loader);
+        }
+        echo $twig->render($template, $args);
+    }
 
 }

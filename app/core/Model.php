@@ -2,9 +2,11 @@
 
 class Model 
 {
+     protected $_db ;
      public function __construct()
      {
-         echo 'model parent activated<br>';
+        $_db = DB::getInstance();
+        echo 'model parent activated<br>';
      }
      
 }

@@ -115,7 +115,7 @@ class Router extends Application
                         echo ( $e->getMessage() );
                        
                        // $this->log->generalError('The action '.$this->_currentAction.' requested by the controller '.$this->_currentController.' does not exists.');
-                        die();
+                       
                  }
             }
          }
@@ -123,7 +123,7 @@ class Router extends Application
          {
             echo ( $e->getMessage() );
            // Log::generalError('The Controller '.$this->_currentController.' does not exists.');
-            die();
+           
          }
 
     }
