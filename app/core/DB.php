@@ -68,7 +68,7 @@ class DB
      * 
      * @return object $this 
      */
-     public function query($sqlStatement, $params) 
+    public function query($sqlStatement, $params) 
     {
         $this->_error = false;
 
@@ -172,7 +172,6 @@ class DB
                 }  
             } else {
                 $whatFinalString = $params['what'];
-               // array_push($bindValues, $params['what']);
             }
           
             $whatFinalString = rtrim($whatFinalString, ',');
@@ -284,7 +283,6 @@ class DB
             $valueString .= '?,';
     
             $values[] = $value;
-
         }
         // remove the extra comma from the end of the string
         $fieldString = rtrim($fieldString, ',');
@@ -293,7 +291,7 @@ class DB
         $sql = "INSERT INTO `{$table}` ({$fieldString}) VALUES ({$valueString}) ";
         echo ($sql);
         //checking if any errors were return when executing this query
-        if (!$this->query($sql, $values)->error()) {
+        if (!$this->query($sql, $values)->getError()) {
           
             return true;
 
@@ -301,15 +299,16 @@ class DB
 
         return false;
 
-    } 
-
+    }
+  
     /**
      * Update method to update  rows in a given table 
      * 
-     * Usage: update('_table_name_', ['_table_field_' => 33], [
-     *                                  'first_name'=>'andrei',
-     *                                  'last_name'=> 'acasa' 
-     *                                   ]))
+     * Usage: update('_table_name_',    ['_table_field_' => 33], 
+     *                                  [
+     *                                      'first_name'    => 'andrei',
+     *                                      'last_name'     => 'acasa' 
+     *                                  ]))
      * 
      * @param string $table     Table name where we want to update
      * @param array  $condition Array of one element that needs to be true
@@ -349,7 +348,7 @@ class DB
 
         $sql = "UPDATE `{$table}` SET {$fieldString} WHERE {$conditionKey}  = ? ";
 
-        if (!$this->query($sql, $values)->error() ) {
+        if (!$this->query($sql, $values)->getError() ) {
             return true;
         }
         return false;
@@ -378,7 +377,7 @@ class DB
 
         $sql  = "DELETE FROM `{$table}` WHERE {$conditionKey} = {$conditionValue}";
         
-        if (!$this->query($sql)->error()) {
+        if (!$this->query($sql)->getError()) {
 
             return true;
         }
@@ -396,6 +395,7 @@ class DB
         return $this->_result;
     }
 
+    
 
     /**
      * Getter method for the private property $_result
@@ -418,5 +418,14 @@ class DB
         return $this->_lastInsertedId;
     }
  
-    
+      /**
+     * Getter function for the protected error property
+     *
+     *  @return string $_error 
+     */
+    public function getError() 
+    {
+        return $this->_error;
+    }
+
 }

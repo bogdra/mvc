@@ -12,15 +12,28 @@ class Home extends Controller
     public function index()
     {
              $db = DB::getInstance();
-             // $db->query("SELECT * FROM users WHERE last_name = ? AND first_name = ? ",['Dragoi','Bogdan']);
-             $db->select('users',[
+            
+        /*      $db->select('users',[
                     'what' => 'username',
                     'cond' => [
                             ['first_name','=','Bogdan'],
                             ['last_name','=','Dragoi']
                             
-                    ]
-             ]);
+                    ],
+                    'order' => 'id',
+                    'limit' => 1
+             ]); */
+             /*  dnd ($db->insert('users',[
+                        'username'=>'dadi',
+                        'password'=>'dsfdsfds',
+                        'first_name'=>'Dragos',
+                        'last_name'=> 'Dragoi',
+                        'email'=>'dradi@yahoo.com',
+                        'group_id'=>1
+                        ]));
+            */
+            $db->update('users',['id'=>2],['first_name'=>'Bogdan Gabriel']);
+            $db->select('users',[]);
              dnd ($db,'object example home.php-16');
              $model = parent::_model('home');
              //View::render('home/index');
