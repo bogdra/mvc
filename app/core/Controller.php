@@ -17,12 +17,14 @@ class Controller
     protected function _model($modelName)
     {
         $filePath = ROOT .DS. "models" .DS. lcfirst($modelName) .'Model.php';
+        $classname = $modelName.'Model';
        // dnl($filePath,'model name');
         if ( file_exists( $filePath ) )
         {
             require_once($filePath);
-            return new $modelName();
+            return new $classname();
         }
+        dnd('The model class requested does not exists','Controller Class , line 27');
         return null;
     }
 

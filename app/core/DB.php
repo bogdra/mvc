@@ -108,7 +108,7 @@ class DB
         catch(PDOException $e)
         {
             Logger::logError($e->getMessage());
-           // dnd($e->getMessage(), 'DB-106');    
+            // dnd($e->getMessage(), 'DB-106');    
         }
 
         return $this;
@@ -391,7 +391,7 @@ class DB
      * 
      * @return array Array of results objects
      */
-    public function results() 
+    public function getResults() 
     {
         return $this->_result;
     }
@@ -427,6 +427,17 @@ class DB
     public function getError() 
     {
         return $this->_error;
+    }
+
+     
+    /**
+     *Return count of the returned sql response
+     *
+     * @return string $count 
+     */
+    public function getCount() 
+    {
+        return count($this->_result);
     }
 
 }

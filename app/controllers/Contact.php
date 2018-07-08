@@ -21,6 +21,7 @@ class Contact extends Controller
                  ],
                  'login'    => ['name'=>'Login', 'link' => URL_ROOT.'/login/login'],
                  'register' => ['name'=>'Register', 'link' => URL_ROOT.'/login/register'],
+                 
                  'siteTitle' => SITE_NAME
                
                 ];

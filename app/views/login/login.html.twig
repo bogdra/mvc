@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Login{% endblock %}
+
+{% block body %}
+{{ include ('navbar.html.twig') }}
+
+
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+    <strong>Holy guacamole!</strong> You should check in on some of those fields below.
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+    </div>  
+
+
+<div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">Login</h5>
+        </div>
+
+        <form method="POST" action="{{ ROOT }}/login/login/" accept-charset="UTF-8">
+            <div class="modal-body">
+        
+                <div class="form-group">
+			        <input type="text" placeholder="Username" name="username" value="" class="form-control form-control-lg" id="inputLarge">
+			        <div class="invalid-feedback">Sorry, this username is not in our database. Try another?</div>
+                </div>
+
+                <div class="form-group">
+                    <input type="password" placeholder="Password" name="password" value="" class="form-control  form-control-lg" id="inputLarge">
+                    <div class="invalid-feedback">Sorry, wrong password. Try another?</div>
+                </div>
+            
+                <div class="custom-control custom-checkbox">
+                    <input type="checkbox" name="remember-me" class="custom-control-input" id="customCheck1" checked="">
+                    <label class="custom-control-label" for="customCheck1">Remember Me</label>
+                </div>
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary btn-lg">Login</button>
+            </div>
+        </form>    
+        
+    </div>
+</div>
+
+
+
+
+{{ include ('footer.html.twig') }}
+{% endblock %}

@@ -1,3 +1,15 @@
+  {% macro recursiveMenu(submenu) %}
+  <li class="nav-item dropdown show">
+    <a class="nav-link dropdown-toggle" tabindex="0" data-toggle="dropdown" data-submenu="" aria-expanded="false">
+      Dropdown
+    </a>
+    <div class="dropdown-menu show">
+        <button class="dropdown-item" type="button">Something else here</button>
+        <div class="dropdown-divider"></div>
+        <a class="nav-link" href="{{ element.link }}">{{ element.name }}</a>
+    </div>
+  </li> 
+   {% endmacro %}
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
   <a class="navbar-brand" href="#">{{ siteTitle }}</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
@@ -11,11 +23,11 @@
                 <span class="sr-only">Artist</span>
             </a>
       </li>
-      {% for element in menu %}
-        <li class="nav-item">
-            <a class="nav-link" href="{{ element.link }}">{{ element.name }}</a>
-         </li>
-      {% endfor %}>
+        {% for element in menu %}
+          <li class="nav-item">
+              <a class="nav-link" href="{{ element.link }}">{{ element.name }}</a>
+          </li>
+        {% endfor %}>
     </ul>
 
     <ul class="navbar-nav ">

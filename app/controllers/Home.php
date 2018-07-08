@@ -31,8 +31,5 @@ class Home extends Controller
     
     }
 
-    public function test()
-    {
-        echo '3232323';
-    }
+    
 }

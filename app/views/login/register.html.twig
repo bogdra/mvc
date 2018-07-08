@@ -1,0 +1,122 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register new Username{% endblock %}
+
+{% block body %}
+{{ include ('navbar.html.twig') }}
+   
+
+<div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">Register</h5>
+        </div>
+
+        <form method="POST" action="{{ ROOT }}/login/register/" accept-charset="UTF-8">
+            <div class="modal-body">
+                <div class="form-group">
+			        <input type="text" placeholder="First Name" name="first_name" {% if fields.first_name is defined %} value="{{ fields.first_name }}" {% endif %} class="form-control form-control-lg {% if errors.first_name is defined %} is-invalid {% endif %}" id="inputLarge">
+			        <div class="invalid-feedback">
+                        {% if errors.first_name is defined %} 
+                           
+                            {% for element in errors.first_name %}
+                                {{ element }}
+                            {% endfor %}
+                          
+                        {% endif %}
+                    </div>
+                </div>
+                
+                <div class="form-group">
+			        <input type="text" placeholder="Last Name" name="last_name" {% if fields.last_name is defined %} value="{{ fields.last_name }}" {% endif %} class="form-control form-control-lg {% if errors.last_name is defined %} is-invalid {% endif %}" id="inputLarge">
+			        <div class="invalid-feedback">
+                        {% if errors.last_name is defined %} 
+                           
+                            {% for element in errors.last_name %}
+                                {{ element }}
+                            {% endfor %}
+                          
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="form-group">
+			        <input type="text" placeholder="Username" name="username" {% if fields.username is defined %} value="{{ fields.username }}" {% endif %} class="form-control form-control-lg {% if errors.username is defined %} is-invalid {% endif %}" id="inputLarge">
+			        <div class="invalid-feedback">
+                        {% if errors.username is defined %} 
+                           
+                            {% for element in errors.username %}
+                                {{ element }}
+                            {% endfor %}
+                          
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <input type="password" placeholder="Password" name="password"  class="form-control form-control-lg {% if errors.password is defined %} is-invalid {% endif %}" id="inputLarge">
+                    <div class="invalid-feedback">
+                        {% if errors.password is defined %} 
+                           
+                            {% for element in errors.password %}
+                                {{ element }}
+                            {% endfor %}
+                          
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <input type="password" placeholder="Repeat Password" name="password_again"  class="form-control  form-control-lg {% if errors.password_again is defined %} is-invalid {% endif %}" id="inputLarge">
+                    <div class="invalid-feedback">
+                        {% if errors.password_again is defined %} 
+                           
+                            {% for element in errors.password_again %}
+                                {{ element }}
+                            {% endfor %}
+                          
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <input type="text" placeholder="Email" name="email" {% if fields.email is defined %} value="{{ fields.email }}" {% endif %} class="form-control form-control-lg {% if errors.email is defined %} is-invalid {% endif %}" id="inputLarge">
+                    <div class="invalid-feedback">
+                        {% if errors.email is defined %} 
+                           
+                            {% for element in errors.email %}
+                                {{ element }}
+                            {% endfor %}
+                          
+                        {% endif %}
+                    </div>
+                </div>
+    
+            
+                <div class="custom-control custom-checkbox">
+                    <input type="checkbox" name="agree_terms" class="custom-control-input " id="customCheck2" ">
+                    
+                    <label class="custom-control-label" for="customCheck2">
+                        <p>By creating an account you agree to our <a href="{{ ROOT }}/page/terms-and-privacy/">Terms & Privacy</a>.</p>
+                    </label>
+                    <div class="invalid-feedback">You must agree to the terms and policy </div>
+                </div>
+
+            </div>
+
+            <div class="modal-footer">
+                <p class="mr-auto"> Already have an account ? <a href="{{ ROOT }}/login/login/">Sign in</a> </p>
+                <button type="submit" class="btn btn-primary btn-lg">Register</button>
+            </div>
+        </form>    
+        
+    </div>
+</div>
+
+
+
+
+
+
+{{ include ('footer.html.twig') }}
+{% endblock %}
